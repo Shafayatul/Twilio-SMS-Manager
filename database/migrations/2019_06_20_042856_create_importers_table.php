@@ -14,10 +14,10 @@ class CreateImportersTable extends Migration
     {
         Schema::create('importers', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('name')->nullable();
             $table->string('group')->nullable();
             $table->string('phone_number')->nullable();
+            $table->timestamps();
             });
     }
 

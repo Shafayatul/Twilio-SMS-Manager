@@ -1,52 +1,72 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2>Importers</h2>
+        </div>
         <div class="row">
-            @include('admin.sidebar')
+            <div class="col-md-12">
+                    @if(Session::has('flash_message'))
+                    <div class="alert alert-success">
+                        <strong>Success!</strong> {{ Session::get('flash_message') }}
+                    </div>
+                @endif
 
-            <div class="col-md-9">
+                @if(Session::has('error'))
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> {{ Session::get('error') }}
+                </div>
+                @endif   
+
+                @if(count($errors)>0)
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> 
+                    @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                    @endforeach
+                </div>
+                @endif
+
+
+            </div>
+        </div>
+        <div class="row clearfix">
+            <!-- Task Info -->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="card">
-                    <div class="card-header">Importers</div>
-                    <div class="card-body">
+                    <div class="body">
                         <a href="{{ url('/importers/create') }}" class="btn btn-success btn-sm" title="Add New Importer">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                            Add New
                         </a>
-
-                        {!! Form::open(['method' => 'GET', 'url' => '/importers', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                            <span class="input-group-append">
-                                <button class="btn btn-secondary" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        {!! Form::close() !!}
-
-                        <br/>
-                        <br/>
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-hover dashboard-task-infos">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Name</th><th>Group</th><th>Phone Number</th><th>Actions</th>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Group</th>
+                                        <th>Phone Number</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($importers as $item)
                                     <tr>
-                                        <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->name }}</td><td>{{ $item->group }}</td><td>{{ $item->phone_number }}</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->group }}</td>
+                                        <td>{{ $item->phone_number }}</td>
                                         <td>
-                                            <a href="{{ url('/importers/' . $item->id) }}" title="View Importer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/importers/' . $item->id . '/edit') }}" title="Edit Importer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <a href="{{ url('/importers/' . $item->id) }}" title="View Importer"><button class="btn btn-info btn-sm"> View</button></a>
+                                            <a href="{{ url('/importers/' . $item->id . '/edit') }}" title="Edit Importer"><button class="btn btn-primary btn-sm"> Edit</button></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
                                                 'url' => ['/importers', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
-                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
+                                                {!! Form::button('Delete', array(
                                                         'type' => 'submit',
                                                         'class' => 'btn btn-danger btn-sm',
                                                         'title' => 'Delete Importer',
@@ -59,11 +79,12 @@
                                 </tbody>
                             </table>
                             <div class="pagination-wrapper"> {!! $importers->appends(['search' => Request::get('search')])->render() !!} </div>
-                        </div>
-
+                        </div>                        
                     </div>
                 </div>
             </div>
+            <!-- #END# Task Info -->
         </div>
     </div>
+</section>
 @endsection

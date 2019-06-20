@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="content">
+<section class="content">
     <div class="container-fluid">
         <div class="block-header">
             <h2>Message History</h2>
@@ -42,4 +42,5 @@
             </div>
         </div>
     </div>
+</section>
 @endsection

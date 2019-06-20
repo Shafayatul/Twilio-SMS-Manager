@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/csv-group-delete/{group}','CSVsController@deleteGroup');
         Route::get('/groupdata-view/{group}','CSVsController@GroupDataView');
         Route::get('/clear-database','CSVsController@truncateCsvsTable');
-  
+        Route::resource('importers', 'ImportersController');
     });
 
 
@@ -59,4 +59,3 @@ Route::group(['middleware' => ['auth']], function() {
 
 });
 
-Route::resource('importers', 'ImportersController');

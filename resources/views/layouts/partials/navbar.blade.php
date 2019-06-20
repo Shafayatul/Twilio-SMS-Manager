@@ -74,6 +74,21 @@
 
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">import_export</i>
+                            <span>Importers</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{{ url('importers/create') }}">Create Import</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('importers') }}">Manage Import</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">supervisor_account</i>
                             <span>Role</span>
                         </a>
